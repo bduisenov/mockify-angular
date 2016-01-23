@@ -1,0 +1,45 @@
+<div class="ui segment basic">
+    <div class="ui segments">
+        <div class="ui steps attached top">
+            <div [ngClass]="fsm.get() === 0? 'active': ''" class="step">
+                <div class="content">
+                    <div class="title">Step 1</div>
+                    <div class="description">introduction</div>
+                </div>
+            </div>
+            <div [ngClass]="fsm.get() === 1? 'active': ''" class="step">
+                <div class="content">
+                    <div class="title">Step 2</div>
+                    <div class="description">basic data</div>
+                </div>
+            </div>
+            <div [ngClass]="fsm.get() === 2? 'active': ''" class="step">
+                <div class="content">
+                    <div class="title">Step 3</div>
+                    <div class="description">groups data</div>
+                </div>
+            </div>
+            <div [ngClass]="fsm.get() === 3? 'active': ''" class="step">
+                <div class="content">
+                    <div class="title">Step 4</div>
+                    <div class="description">overview</div>
+                </div>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+        <div class="ui segment">
+            <div (click)="onCancel()" class="ui button">
+                Cancel
+            </div>
+            <div *ngIf="fsm.get() !== 0" (click)="onPrev()" class="ui button">
+                Previous
+            </div>
+            <div *ngIf="fsm.get() !== 3" (click)="onNext()" class="ui button">
+                Next
+            </div>
+            <div *ngIf="fsm.get() === 3" class="ui button">
+                Create
+            </div>
+        </div>
+    </div>
+</div>

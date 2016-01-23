@@ -1,0 +1,34 @@
+<div class="ui segment basic">
+    <h2 class="ui icon header center aligned">
+        <i class="leaf icon"></i>
+        <div class="content">
+            Welcome to Mockify
+            <div class="sub header">service for mocking endpoints.</div>
+        </div>
+    </h2>
+    <div class="ui segment raised">
+        <div class="ui two column stackable center aligned grid ">
+            <div class="column">
+                <h3 class="ui header">Open existing project</h3>
+                <div class="ui relaxed divided items">
+                    <div *ngFor="#project of projects">
+                        <div class="content">
+                            <div class="header" id="{{ project.uid }}">{{ project.title }}</div>
+                            <div class="description">#projectNote</div>
+                            <div class="extra">
+                                <div (click)="onSelect(project.uid)" class="ui right floated primary button">
+                                    Open
+                                    <i class="right chevron icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui vertical divider">or</div>
+            <div class="column">
+                <div (click)="onCreate()" class="teal ui button">Create a new project</div>
+            </div>
+        </div>
+    </div>
+</div>

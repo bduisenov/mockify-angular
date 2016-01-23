@@ -1,0 +1,21 @@
+<div class="ui main menu">
+    <div class="item">
+        <i class="leaf icon"></i>
+    </div>
+    <div class="ui upward dropdown item floating" >
+        <span>{{ title ? title : defaultTitle}}</span>
+        <div class="ui menu transition hidden">
+            <div (click)="onProjectCreation()" class="item"><i class="add square icon green"></i>Create project</div>
+            <div class="divider"></div>
+            <div class="ui transparent icon left input">
+                <i class="search icon"></i>
+                <input #filter (keyup)="onFilter(filter.value)" type="text" placeholder="Project name or uid..." tabindex="1"/>
+            </div>
+            <div class="divider"></div>
+            <div (click)="onProjectSelection( project.uid )" *ngFor="#project of projects" class="item">
+                <span class="description">{{ project.uid }}</span>
+                <span class="text">{{ project.title }}</span>
+            </div>
+        </div>
+    </div>
+</div>
