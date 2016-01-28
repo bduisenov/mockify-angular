@@ -8,7 +8,7 @@ System.register(['angular2/core', './components/header.component', "angular2/rou
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, header_component_1, router_1, router_2, project_wizard_component_1, welcome_component_1, project_component_1;
+    var core_1, header_component_1, router_1, router_2, project_wizard_component_1, welcome_component_1, project_component_1, router_3;
     var AppComponent;
     return {
         setters:[
@@ -21,6 +21,7 @@ System.register(['angular2/core', './components/header.component', "angular2/rou
             function (router_1_1) {
                 router_1 = router_1_1;
                 router_2 = router_1_1;
+                router_3 = router_1_1;
             },
             function (project_wizard_component_1_1) {
                 project_wizard_component_1 = project_wizard_component_1_1;
@@ -33,8 +34,10 @@ System.register(['angular2/core', './components/header.component', "angular2/rou
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_router) {
+                    var _this = this;
                     this.title = 'Tour of Heroes';
+                    _router.subscribe(function (val) { return _this.currentCssStyle = (val.indexOf('project/') === 0) ? 'ui two column grid' : 'ui container'; });
                 }
                 AppComponent = __decorate([
                     core_1.Component({
@@ -51,7 +54,7 @@ System.register(['angular2/core', './components/header.component', "angular2/rou
                         { path: '/new/project/...', name: 'ProjectWizard', component: project_wizard_component_1.ProjectWizardComponent },
                         { path: '/project/:uid/...', name: 'Project', component: project_component_1.ProjectComponent },
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [router_3.Router])
                 ], AppComponent);
                 return AppComponent;
             })();

@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/router", "./overview.component", "./mock.component"], function(exports_1) {
+System.register(["angular2/core", "angular2/router", "./overview.component", "./mock.component", "../../services/project.service"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(["angular2/core", "angular2/router", "./overview.component", "./
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, overview_component_1, mock_component_1;
+    var core_1, router_1, overview_component_1, mock_component_1, project_service_1;
     var ProjectComponent;
     return {
         setters:[
@@ -23,13 +23,24 @@ System.register(["angular2/core", "angular2/router", "./overview.component", "./
             },
             function (mock_component_1_1) {
                 mock_component_1 = mock_component_1_1;
+            },
+            function (project_service_1_1) {
+                project_service_1 = project_service_1_1;
             }],
         execute: function() {
             ProjectComponent = (function () {
-                function ProjectComponent(_router, _routeParams) {
+                function ProjectComponent(_router, _routeParams, _projectService) {
                     this._router = _router;
                     this._routeParams = _routeParams;
+                    this._projectService = _projectService;
                 }
+                ProjectComponent.prototype.ngOnInit = function () {
+                    this.projectSubscription = this._projectService.getCurrentProjectObservable().subscribe(function (projects) {
+                    });
+                };
+                ProjectComponent.prototype.ngOnDestroy = function () {
+                    this.projectSubscription.unsubscribe();
+                };
                 ProjectComponent = __decorate([
                     core_1.Component({
                         selector: 'router-outlet',
@@ -42,7 +53,7 @@ System.register(["angular2/core", "angular2/router", "./overview.component", "./
                         { path: '/', name: 'Overview', component: overview_component_1.OverviewComponent, useAsDefault: true },
                         { path: '/mock/:uid', name: 'MockDetail', component: mock_component_1.MockComponent }
                     ]), 
-                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams])
+                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, project_service_1.ProjectService])
                 ], ProjectComponent);
                 return ProjectComponent;
             })();

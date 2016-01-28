@@ -8,6 +8,7 @@ import {WelcomeComponent} from "./components/welcome.component";
 import {FSM} from "./assets/fsm";
 import {AuxRoute} from "angular2/router";
 import {ProjectComponent} from "./components/project/project.component";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'mockify-app',
@@ -31,5 +32,11 @@ import {ProjectComponent} from "./components/project/project.component";
 export class AppComponent {
 
     public title = 'Tour of Heroes';
+
+    currentCssStyle: string;
+
+    constructor(_router: Router) {
+        _router.subscribe(val => this.currentCssStyle = (val.indexOf('project/') === 0) ? 'ui two column grid': 'ui container');
+    }
 
 }
